@@ -138,6 +138,11 @@ module Net; module SSH; module Test
             processed += 1 if reader.idle!
           end
 
+          ##
+          # todo: fluong - this is creating problems for me when I run session.process
+          # todo:  but if I return nil, can't "close" the channel...
+          # todo:    NoMethodError: undefined method `close' for nil:NilClass
+          # todo:  ...makes it hacky... not sure what to do
           raise "no readers were ready for reading, and none had any incoming packets" if processed == 0
         end
       end

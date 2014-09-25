@@ -68,6 +68,25 @@ module Net; module SSH; module Test
       script.sends_channel_request(self, "exec", reply, command, success)
     end
 
+    # Scripts the sending of a "pty-req" channel request packet to the mock
+    # server. If +reply+ is true, then the server is expected to reply to the
+    # request, otherwise no response to this request will be sent. If +success+
+    # is +true+, then the request will be successful, otherwise a failure will
+    # be scripted.
+    def sends_pty_req(command, reply=true, success=true)
+      script.sends_channel_request(self, "pty-req", reply, nil, success)
+    end
+
+    # Scripts the sending of a "shell" channel request packet to the mock
+    # server. If +reply+ is true, then the server is expected to reply to the
+    # request, otherwise no response to this request will be sent. If +success+
+    # is +true+, then the request will be successful, otherwise a failure will
+    # be scripted.
+    def sends_shell_req(command, reply=true, success=true)
+      script.sends_channel_request(self, "shell", reply, nil, success)
+    end
+
+
     # Scripts the sending of a "subsystem" channel request packet to the mock
     # server. See #sends_exec for a discussion of the meaning of the +reply+
     # and +success+ arguments.
